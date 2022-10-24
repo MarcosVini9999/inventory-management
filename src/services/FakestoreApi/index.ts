@@ -1,0 +1,1 @@
+export { fakestoreApi } from "./fakestoreApi";
