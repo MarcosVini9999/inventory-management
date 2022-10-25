@@ -1,13 +1,18 @@
+import { CartPage } from "pages/CartPage";
 import { MainPage } from "pages/MainPage";
-import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { ProductCardProvider } from "contexts/CartContext";
+import React from "react";
 
 export const Router: React.FC = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<MainPage />} />
-      </Routes>
-    </BrowserRouter>
+    <ProductCardProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/cart" element={<CartPage />} />
+        </Routes>
+      </BrowserRouter>
+    </ProductCardProvider>
   );
 };

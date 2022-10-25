@@ -1,5 +1,6 @@
 import { Box } from "@mui/material";
 import { ProductCard } from "components/ProductCard/ProductCard";
+import React from "react";
 
 interface RatingProps {
   rate: number;
@@ -17,23 +18,21 @@ interface ProductCardProps {
 
 interface ProductCardGeneratorProps {
   productList: Array<ProductCardProps>;
+  onPostNewProductOnCart: Function;
 }
 
 export const ProductCardGenerator: React.FC<ProductCardGeneratorProps> = ({
   productList,
+  onPostNewProductOnCart,
 }) => {
   return (
     <Box>
-      {productList.map(productList => (
+      {productList.map(product => (
         <Box>
           <ProductCard
-            title={productList.title}
-            price={productList.price}
-            description={productList.description}
-            category={productList.category}
-            image={productList.image}
-            rating={productList.rating}
-          ></ProductCard>
+            product={product}
+            onPostNewProductOnCart={onPostNewProductOnCart}
+          />
         </Box>
       ))}
     </Box>

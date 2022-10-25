@@ -1,11 +1,12 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
+import React from "react";
 
 interface RatingProps {
   rate: number;
   count: number;
 }
 
-interface ProductCardProps {
+interface ProductProps {
   title: string;
   price: number;
   description: string;
@@ -14,18 +15,20 @@ interface ProductCardProps {
   rating: Array<RatingProps>;
 }
 
+interface ProductCardProps {
+  product: ProductProps;
+  onPostNewProductOnCart: Function;
+}
+
 export const ProductCard: React.FC<ProductCardProps> = ({
-  title,
-  price,
-  description,
-  category,
-  image,
-  rating,
+  product,
+  onPostNewProductOnCart,
 }) => {
   return (
     <Box>
-      <Typography>{title}</Typography>
-      <img src={image} alt="Product_Image" />
+      <Typography>{product.title}</Typography>
+      <img src={product.image} alt="Product_Image" />
+      <Button onClick={() => onPostNewProductOnCart(product)}>Comprar</Button>
     </Box>
   );
 };

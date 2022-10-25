@@ -1,9 +1,11 @@
 import { PageContainer } from "components/PageContainer";
 import { ProductCardGenerator } from "components/ProductCardGenerator";
 import { fakestoreApi } from "services/FakestoreApi";
+import { ProductCardContext } from "contexts/CartContext";
 import React from "react";
 
 export const MainPage: React.FC = () => {
+  const { postNewProductCardOnCart } = React.useContext(ProductCardContext);
   const [list, setList] = React.useState([]);
   const fetchData = async () => {
     try {
@@ -17,7 +19,10 @@ export const MainPage: React.FC = () => {
 
   return (
     <PageContainer>
-      <ProductCardGenerator productList={list}></ProductCardGenerator>
+      <ProductCardGenerator
+        productList={list}
+        onPostNewProductOnCart={postNewProductCardOnCart}
+      ></ProductCardGenerator>
     </PageContainer>
   );
 };
