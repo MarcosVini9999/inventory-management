@@ -1,6 +1,7 @@
 import { Box } from "@mui/material";
 import { ProductCard } from "components/ProductCard/ProductCard";
 import React from "react";
+import { Container, ProductsWrapper } from "./ProductCardGenerator.styles";
 
 interface RatingProps {
   rate: number;
@@ -27,15 +28,17 @@ export const ProductCardGenerator: React.FC<ProductCardGeneratorProps> = ({
   onPostNewProductOnCart,
 }) => {
   return (
-    <Box>
-      {productList.map(product => (
-        <Box>
-          <ProductCard
-            product={product}
-            onPostNewProductOnCart={onPostNewProductOnCart}
-          />
-        </Box>
-      ))}
-    </Box>
+    <Container>
+      <ProductsWrapper>
+        {productList.map(product => (
+          <Box>
+            <ProductCard
+              product={product}
+              onPostNewProductOnCart={onPostNewProductOnCart}
+            />
+          </Box>
+        ))}
+      </ProductsWrapper>
+    </Container>
   );
 };

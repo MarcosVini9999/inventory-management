@@ -16,7 +16,6 @@ export const MainPage: React.FC = () => {
     }
   };
   fetchData();
-
   return (
     <PageContainer>
       <ProductCardGenerator

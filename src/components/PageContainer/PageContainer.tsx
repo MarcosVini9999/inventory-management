@@ -1,6 +1,7 @@
 import React from "react";
 import { PageFooter } from "components/PageFooter";
 import { PageHeader } from "components/PageHeader";
+import { Container } from "./PageContainer.style";
 
 interface PageContainerProps {
   children: React.ReactNode;
@@ -8,10 +9,10 @@ interface PageContainerProps {
 
 export const PageContainer: React.FC<PageContainerProps> = ({ children }) => {
   return (
-    <React.Fragment>
+    <Container>
       <PageHeader />
       {children}
       <PageFooter />
-    </React.Fragment>
+    </Container>
   );
 };

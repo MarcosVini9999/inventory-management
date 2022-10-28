@@ -1,5 +1,6 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import React from "react";
+import { Container, Pic } from "./ProductCard.styles";
 
 interface RatingProps {
   rate: number;
@@ -26,10 +27,15 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   onPostNewProductOnCart,
 }) => {
   return (
-    <Box>
+    <Container>
+      <Pic src={product.image} alt="Product_Image" />
       <Typography>{product.title}</Typography>
-      <img src={product.image} alt="Product_Image" />
-      <Button onClick={() => onPostNewProductOnCart(product)}>Comprar</Button>
-    </Box>
+      <Typography>{product.price}</Typography>
+      <Typography>{product.category}</Typography>
+      <Typography>{product?.description.slice(0, 75)}...</Typography>
+      <Button onClick={() => onPostNewProductOnCart(product)}>
+        Adicionar ao Carrinho
+      </Button>
+    </Container>
   );
 };
