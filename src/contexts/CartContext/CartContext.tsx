@@ -6,12 +6,14 @@ interface RatingProps {
 }
 
 interface ProductCardProps {
+  id: number;
   title: string;
   price: number;
   description: string;
   category: string;
   image: string;
   rating: Array<RatingProps>;
+  amount: number;
 }
 
 interface CartContextProps {
@@ -31,10 +33,27 @@ export const ProductCardProvider: React.FC<ProductCardProviderProps> = ({
   const [productCartList, setProductCardList] = React.useState<
     ProductCardProps[]
   >([]);
+  const isFoundInCart = (productId: number) => {
+    return productCartList.some(element => {
+      if (element.id === productId) {
+        return true;
+      }
+      return false;
+    });
+  };
   const postNewProductCardOnCart = (ProductCard: ProductCardProps) => {
-    const novaLista = [...productCartList];
-    novaLista.push(ProductCard);
-    setProductCardList(novaLista);
+    if (!isFoundInCart(ProductCard.id)) {
+      ProductCard.amount = 1;
+      const novaLista = [...productCartList];
+      novaLista.push(ProductCard);
+      setProductCardList(novaLista);
+    } else {
+      productCartList.forEach(product => {
+        if (product.id === ProductCard.id) {
+          product.amount += 1;
+        }
+      });
+    }
   };
 
   return (

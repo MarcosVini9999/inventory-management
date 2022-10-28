@@ -12,6 +12,7 @@ export const CartPage: React.FC = () => {
       {productCartList.map(product => (
         <Box>
           <Typography>{product.title}</Typography>
+          <Typography>{product.amount}</Typography>
         </Box>
       ))}
     </PageContainer>

@@ -8,6 +8,7 @@ interface RatingProps {
 }
 
 interface ProductCardProps {
+  id: number;
   title: string;
   price: number;
   description: string;

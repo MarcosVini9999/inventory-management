@@ -7,6 +7,7 @@ interface RatingProps {
 }
 
 interface ProductProps {
+  id: number;
   title: string;
   price: number;
   description: string;
