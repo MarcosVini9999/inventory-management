@@ -5,4 +5,6 @@ export const Container = styled(Box)({
   display: "flex",
   flexDirection: "column",
   gap: "10px",
+  justifyContent: "space-between",
+  height: "100vh",
 });

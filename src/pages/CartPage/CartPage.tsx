@@ -4,17 +4,17 @@ import { ProductCardContext } from "contexts/CartContext";
 import React from "react";
 
 export const CartPage: React.FC = () => {
-  const { productCartList } = React.useContext(ProductCardContext);
+  const { cartListMemo } = React.useContext(ProductCardContext);
 
   return (
-    <PageContainer>
+    <React.Fragment>
       <Typography>Carrinho</Typography>
-      {productCartList.map(product => (
+      {cartListMemo.map(product => (
         <Box>
           <Typography>{product.title}</Typography>
           <Typography>{product.amount}</Typography>
         </Box>
       ))}
-    </PageContainer>
+    </React.Fragment>
   );
 };

@@ -2,16 +2,13 @@ import React from "react";
 import { PageFooter } from "components/PageFooter";
 import { PageHeader } from "components/PageHeader";
 import { Container } from "./PageContainer.style";
+import { Outlet } from "react-router-dom";
 
-interface PageContainerProps {
-  children: React.ReactNode;
-}
-
-export const PageContainer: React.FC<PageContainerProps> = ({ children }) => {
+export const PageContainer: React.FC = () => {
   return (
     <Container>
       <PageHeader />
-      {children}
+      <Outlet />
       <PageFooter />
     </Container>
   );

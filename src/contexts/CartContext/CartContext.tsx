@@ -17,7 +17,7 @@ interface ProductCardProps {
 }
 
 interface CartContextProps {
-  productCartList: ProductCardProps[];
+  cartListMemo: ProductCardProps[];
   postNewProductCardOnCart: (ProductCard: ProductCardProps) => void;
 }
 
@@ -33,6 +33,7 @@ export const ProductCardProvider: React.FC<ProductCardProviderProps> = ({
   const [productCartList, setProductCardList] = React.useState<
     ProductCardProps[]
   >([]);
+  const cartListMemo = React.useMemo(() => productCartList, [productCartList]);
   const isFoundInCart = (productId: number) => {
     return productCartList.some(element => {
       if (element.id === productId) {
@@ -59,7 +60,7 @@ export const ProductCardProvider: React.FC<ProductCardProviderProps> = ({
   return (
     <ProductCardContext.Provider
       value={{
-        productCartList,
+        cartListMemo,
         postNewProductCardOnCart,
       }}
     >
