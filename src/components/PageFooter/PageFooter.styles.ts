@@ -7,7 +7,6 @@ export const Footer = styled(Box)({
   justifyContent: "center",
   backgroundColor: "Black",
   color: "white",
-  height: "150px",
   width: "100%",
   "& a": {
     color: "red",
@@ -21,5 +20,5 @@ export const Footer = styled(Box)({
 export const FooterContent = styled(Box)({
   display: "flex",
   alignItems: "center",
-  marginBlock: "40px",
+  marginBlock: "30px",
 });
