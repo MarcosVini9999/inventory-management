@@ -15,7 +15,7 @@ interface ProductCardProps {
   description: string;
   category: string;
   image: string;
-  rating: Array<RatingProps>;
+  rating: RatingProps;
 }
 
 interface ProductCardGeneratorProps {

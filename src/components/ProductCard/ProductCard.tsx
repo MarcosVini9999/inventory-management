@@ -21,7 +21,7 @@ interface ProductProps {
   description: string;
   category: string;
   image: string;
-  rating: Array<RatingProps>;
+  rating: RatingProps;
 }
 
 interface ProductCardProps {
@@ -34,16 +34,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   onPostNewProductOnCart,
 }) => {
   return (
-    // <Container>
-    //   <Pic src={product.image} alt="Product_Image" />
-    //   <Typography>{product.title}</Typography>
-    //   <Typography>{product.price}</Typography>
-    //   <Typography>{product.category}</Typography>
-    //   <Typography>{product?.description.slice(0, 75)}...</Typography>
-    //   <Button onClick={() => onPostNewProductOnCart(product)}>
-    //     Adicionar ao Carrinho
-    //   </Button>
-    // </Container>
     <Container>
       <Card sx={{ minWidth: 250 }}>
         <CardMedia
