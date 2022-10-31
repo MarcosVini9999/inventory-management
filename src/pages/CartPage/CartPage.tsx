@@ -9,7 +9,8 @@ import {
 } from "./CartPage.styles";
 
 export const CartPage: React.FC = () => {
-  const { cartListMemo, totalPayable } = React.useContext(ProductCardContext);
+  const { cartListMemo, calculateTotalAmountToPay } =
+    React.useContext(ProductCardContext);
   return (
     <CartWrapper>
       <CartProductList>
@@ -27,7 +28,7 @@ export const CartPage: React.FC = () => {
         </Box>
         <Box>
           <Typography>
-            Total <b>R${totalPayable}</b>
+            Total <b>R${calculateTotalAmountToPay()}</b>
           </Typography>
         </Box>
         <Button variant="contained">Realizar compra</Button>

@@ -19,10 +19,10 @@ interface ProductCardProps {
 interface CartContextProps {
   cartListMemo: ProductCardProps[];
   postNewProductCardOnCart: (ProductCard: ProductCardProps) => void;
-  totalPayable: number;
   putProductOnCart: (ProductCard: ProductCardProps) => void;
   removeOnlyOnePoductOnCart: (ProductCard: ProductCardProps) => void;
   removeProductOnCart: (ProductCard: ProductCardProps) => void;
+  calculateTotalAmountToPay: () => number;
 }
 
 interface ProductCardProviderProps {
@@ -34,11 +34,19 @@ export const ProductCardContext = React.createContext({} as CartContextProps);
 export const ProductCardProvider: React.FC<ProductCardProviderProps> = ({
   children,
 }) => {
-  const [totalPayable, setTotalPayable] = React.useState(0);
   const [productCartList, setProductCardList] = React.useState<
     ProductCardProps[]
   >([]);
   const cartListMemo = React.useMemo(() => productCartList, [productCartList]);
+  const replaceCartElement = (ProductCard: ProductCardProps) => {
+    const newProductLista = [...productCartList];
+    productCartList.forEach((element, index) => {
+      if (ProductCard.id === element.id) {
+        newProductLista.splice(index, 1, ProductCard);
+      }
+    });
+    setProductCardList(newProductLista);
+  };
   const isFoundInCart = (productId: number) => {
     return productCartList.some(element => {
       if (element.id === productId) {
@@ -60,26 +68,28 @@ export const ProductCardProvider: React.FC<ProductCardProviderProps> = ({
         }
       });
     }
-    setTotalPayable(totalPayable + ProductCard.price);
   };
   const putProductOnCart = (ProductCard: ProductCardProps) => {
-    if (ProductCard.amount < ProductCard.rating.count) {
-      ProductCard.amount = ProductCard.amount + 1;
-      setTotalPayable(totalPayable + ProductCard.price);
-    } else {
-      alert("Quantidade insuficiente no estoque");
-    }
+    const newProductCard = ProductCard;
+    newProductCard.amount += 1;
+    replaceCartElement(newProductCard);
   };
   const removeOnlyOnePoductOnCart = (ProductCard: ProductCardProps) => {
     if (ProductCard.amount > 1) {
-      ProductCard.amount = ProductCard.amount - 1;
-      setTotalPayable(totalPayable - ProductCard.price);
+      const newProductCard = ProductCard;
+      newProductCard.amount += 1;
+      replaceCartElement(newProductCard);
     }
   };
   const removeProductOnCart = (ProductCard: ProductCardProps) => {
-    setTotalPayable(totalPayable - ProductCard.price * ProductCard.amount);
     setProductCardList(
       productCartList.filter(product => product.id !== ProductCard.id),
+    );
+  };
+  const calculateTotalAmountToPay = () => {
+    return productCartList.reduce(
+      (total, product) => total + product.amount * product.price,
+      0,
     );
   };
 
@@ -88,10 +98,10 @@ export const ProductCardProvider: React.FC<ProductCardProviderProps> = ({
       value={{
         cartListMemo,
         postNewProductCardOnCart,
-        totalPayable,
         putProductOnCart,
         removeProductOnCart,
         removeOnlyOnePoductOnCart,
+        calculateTotalAmountToPay,
       }}
     >
       {children}
