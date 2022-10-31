@@ -75,9 +75,6 @@ export const ProductCardProvider: React.FC<ProductCardProviderProps> = ({
       ProductCard.amount = ProductCard.amount - 1;
       setTotalPayable(totalPayable - ProductCard.price);
     }
-    if (ProductCard.amount === 1) {
-      removeProductOnCart(ProductCard);
-    }
   };
   const removeProductOnCart = (ProductCard: ProductCardProps) => {
     setTotalPayable(totalPayable - ProductCard.price * ProductCard.amount);
