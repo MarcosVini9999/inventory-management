@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { ProductCartGenerator } from "components/ProductCartList";
 import { ProductCardContext } from "contexts/CartContext";
 import React from "react";
@@ -18,19 +18,15 @@ export const CartPage: React.FC = () => {
         <ProductCartGenerator productCartList={cartListMemo} />
       </CartProductList>
       <CartProductPriceViewer>
-        <Box>
-          <Typography>
-            Frete <b>R$00.00</b>
-          </Typography>
-          <Typography>
-            Desconto <b>R$00.00</b>
-          </Typography>
-        </Box>
-        <Box>
-          <Typography>
-            Total <b>R${calculateTotalAmountToPay()}</b>
-          </Typography>
-        </Box>
+        <Typography>
+          Frete <b>R$00.00</b>
+        </Typography>
+        <Typography>
+          Desconto <b>R$00.00</b>
+        </Typography>
+        <Typography>
+          Total <b>R${calculateTotalAmountToPay().toFixed(2)}</b>
+        </Typography>
         <Button variant="contained">Realizar compra</Button>
       </CartProductPriceViewer>
     </CartWrapper>

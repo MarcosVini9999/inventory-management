@@ -2,22 +2,25 @@ import { styled } from "@mui/system";
 import { Box } from "@mui/material";
 
 export const CartWrapper = styled(Box)({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "space-around",
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fit, minmax(500px, 1fr))",
+  gridGap: "5px",
 });
 export const CartProductList = styled(Box)({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
   "& h6": {
-    margin: "-15px",
     marginBottom: "10px",
     fontSize: "1.2rem",
   },
 });
 export const CartProductPriceViewer = styled(Box)({
-  display: "flex",
   flexDirection: "column",
-  alignItems: "flex-start",
+  display: "flex",
+  alignItems: "center",
   gap: "10px",
+  justifyContent: "center",
   "& button": {
     width: "300px",
     backgroundColor: "#89D963",
