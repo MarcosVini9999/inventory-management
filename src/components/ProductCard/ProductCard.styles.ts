@@ -1,7 +1,9 @@
 import { styled } from "@mui/system";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 export const Container = styled(Box)({
+  cursor: "pointer",
+  zIndex: "1",
   "&:hover": {
     transform: " translateY(-3px)",
     transitionProperty: "transform",
@@ -15,4 +17,8 @@ export const CardFooter = styled(Box)({
     justifyContent: "space-between",
     alignItems: "center",
   },
+});
+
+export const ProductTitle = styled(Typography)({
+  fontSize: "20px",
 });

@@ -25,8 +25,11 @@ interface ProductCartProps {
 }
 
 export const ProductCart: React.FC<ProductCartProps> = ({ product }) => {
-  const { putProductOnCart, removeOnlyOnePoductOnCart, removeProductOnCart } =
-    React.useContext(ProductCardContext);
+  const {
+    putOnlyOneProductOnCart,
+    removeOnlyOnePoductOnCart,
+    removeProductOnCart,
+  } = React.useContext(ProductCardContext);
   return (
     <ProductCartWrapper>
       <Box>
@@ -38,8 +41,8 @@ export const ProductCart: React.FC<ProductCartProps> = ({ product }) => {
           <Button onClick={() => removeOnlyOnePoductOnCart(product)}>
             <ArrowBackIos />
           </Button>
-          <Typography>Quantidade: {product.amount}</Typography>
-          <Button onClick={() => putProductOnCart(product)}>
+          <Typography>{product.amount}</Typography>
+          <Button onClick={() => putOnlyOneProductOnCart(product)}>
             <ArrowForwardIos />
           </Button>
         </Box>

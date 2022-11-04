@@ -7,7 +7,8 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import { CardFooter, Container } from "./ProductCard.styles";
+import { useNavigate } from "react-router-dom";
+import { CardFooter, Container, ProductTitle } from "./ProductCard.styles";
 
 interface RatingProps {
   rate: number;
@@ -33,6 +34,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   product,
   onPostNewProductOnCart,
 }) => {
+  const navigate = useNavigate();
+  const onProductClick = () => navigate(`/products/${product.id}`);
+
   return (
     <Container>
       <Card sx={{ minWidth: 250 }}>
@@ -41,16 +45,29 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           height="320"
           image={product.image}
           alt="green iguana"
+          onClick={() => {
+            onProductClick();
+          }}
         />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            {product.title}
-          </Typography>
+        <CardContent
+          onClick={() => {
+            onProductClick();
+          }}
+        >
+          {product.title.length > 20 ? (
+            <ProductTitle gutterBottom variant="h5">
+              {product.title.slice(0, 20)}...
+            </ProductTitle>
+          ) : (
+            <ProductTitle gutterBottom variant="h5">
+              {product.title}
+            </ProductTitle>
+          )}
           <Typography gutterBottom variant="subtitle2" component="div">
             {product.category}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {product?.description.slice(0, 75)}...
+            {product?.description.slice(0, 60)}...
           </Typography>
         </CardContent>
         <CardFooter>

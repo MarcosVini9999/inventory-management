@@ -18,8 +18,9 @@ interface ProductCardProps {
 
 interface CartContextProps {
   cartListMemo: ProductCardProps[];
+  allItemsInCart: number;
   postNewProductCardOnCart: (ProductCard: ProductCardProps) => void;
-  putProductOnCart: (ProductCard: ProductCardProps) => void;
+  putOnlyOneProductOnCart: (ProductCard: ProductCardProps) => void;
   removeOnlyOnePoductOnCart: (ProductCard: ProductCardProps) => void;
   removeProductOnCart: (ProductCard: ProductCardProps) => void;
   calculateTotalAmountToPay: () => number;
@@ -38,6 +39,15 @@ export const ProductCardProvider: React.FC<ProductCardProviderProps> = ({
     ProductCardProps[]
   >([]);
   const cartListMemo = React.useMemo(() => productCartList, [productCartList]);
+  const allItemsInCart = productCartList.reduce(
+    (prevVal, element) => prevVal + element.amount,
+    0,
+  );
+
+  const getProductByID = (ProductID: number) => {
+    const product = productCartList.filter(product => product.id === ProductID);
+    return product[0];
+  };
   const replaceCartElement = (ProductCard: ProductCardProps) => {
     const newProductLista = [...productCartList];
     productCartList.forEach((element, index) => {
@@ -62,14 +72,10 @@ export const ProductCardProvider: React.FC<ProductCardProviderProps> = ({
       newProductLista.push(ProductCard);
       setProductCardList(newProductLista);
     } else {
-      productCartList.forEach(product => {
-        if (product.id === ProductCard.id) {
-          product.amount += 1;
-        }
-      });
+      putOnlyOneProductOnCart(getProductByID(ProductCard.id));
     }
   };
-  const putProductOnCart = (ProductCard: ProductCardProps) => {
+  const putOnlyOneProductOnCart = (ProductCard: ProductCardProps) => {
     const newProductCard = ProductCard;
     newProductCard.amount += 1;
     replaceCartElement(newProductCard);
@@ -97,8 +103,9 @@ export const ProductCardProvider: React.FC<ProductCardProviderProps> = ({
     <ProductCardContext.Provider
       value={{
         cartListMemo,
+        allItemsInCart,
         postNewProductCardOnCart,
-        putProductOnCart,
+        putOnlyOneProductOnCart,
         removeProductOnCart,
         removeOnlyOnePoductOnCart,
         calculateTotalAmountToPay,
