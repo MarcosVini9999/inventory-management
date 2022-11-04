@@ -7,7 +7,7 @@ import { Box } from "@mui/material";
 import { ProductCardContext } from "contexts/CartContext";
 
 export const PageHeader: React.FC = () => {
-  const { cartListMemo } = React.useContext(ProductCardContext);
+  const { allItemsInCart } = React.useContext(ProductCardContext);
 
   return (
     <Container>
@@ -15,12 +15,12 @@ export const PageHeader: React.FC = () => {
         <img src={logo} alt="Logo" />
       </Link>
       <Box className="tool-bar">
-        <Link to="/">HOME</Link>
-        <Link to="/">PRODUCTS</Link>
+        <Link to="/home">HOME</Link>
+        <Link to="/products">PRODUCTS</Link>
         <Link to="/contact">CONTACT</Link>
         <Link to="/cart">
           <ShoppingCartIcon />
-          {cartListMemo.length}
+          {allItemsInCart}
         </Link>
       </Box>
     </Container>
