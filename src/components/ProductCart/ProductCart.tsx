@@ -2,6 +2,7 @@ import { ArrowBackIos, ArrowForwardIos, Delete } from "@mui/icons-material";
 import { Box, Button, Typography } from "@mui/material";
 import { ProductCardContext } from "contexts/CartContext";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { ProductCartImage, ProductCartWrapper } from "./ProductCart.styles";
 
 interface RatingProps {
@@ -30,11 +31,19 @@ export const ProductCart: React.FC<ProductCartProps> = ({ product }) => {
     removeOnlyOnePoductOnCart,
     removeProductOnCart,
   } = React.useContext(ProductCardContext);
+  const navigate = useNavigate();
+  const onProductClick = () => navigate(`/products/${product.id}`);
   return (
     <ProductCartWrapper>
       <Box>
         <ProductCartImage src={product.image} alt="Product" />
-        <Typography>{product.title.slice(0, 50)}</Typography>
+        <Button
+          onClick={() => {
+            onProductClick();
+          }}
+        >
+          {product.title.slice(0, 50)}
+        </Button>
       </Box>
       <Box>
         <Box className="productCartOptionsAmount">
