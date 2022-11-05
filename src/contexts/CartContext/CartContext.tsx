@@ -83,7 +83,7 @@ export const ProductCardProvider: React.FC<ProductCardProviderProps> = ({
   const removeOnlyOnePoductOnCart = (ProductCard: ProductCardProps) => {
     if (ProductCard.amount > 1) {
       const newProductCard = ProductCard;
-      newProductCard.amount += 1;
+      newProductCard.amount -= 1;
       replaceCartElement(newProductCard);
     }
   };
